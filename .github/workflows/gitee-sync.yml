@@ -1,0 +1,24 @@
+name: Sync to Gitee
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to Gitee
+        uses: wearerequired/git-to-gitee-action@v1
+        with:
+          gitee-password: ${{ secrets.GITEE_PASSWORD }}
+          gitee-url: https://gitee.com/jiayile
+          gitee-username: ${{ secrets.GITEE_USERNAME }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
